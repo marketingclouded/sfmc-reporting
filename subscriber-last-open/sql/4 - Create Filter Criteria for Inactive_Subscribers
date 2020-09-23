@@ -1,0 +1,3 @@
+SELECT *
+FROM Subscriber_Last_Open
+WHERE LastOpenDate < DATEADD(d,-90,GETDATE()) AND Status = 'Active'
