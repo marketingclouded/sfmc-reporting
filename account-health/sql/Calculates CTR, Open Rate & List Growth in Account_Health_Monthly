@@ -1,0 +1,10 @@
+SELECT
+  e.Month,
+  CAST(SUM(d.Opens) as DECIMAL(18,2)) / CAST(SUM(d.Sent) AS DECIMAL(18,2)) * 100 AS 'UniqueOpenRate',
+  CAST(sum(d.Clicks) AS DECIMAL(18,2)) / CAST(SUM(d.Sent) AS DECIMAL(18,2)) * 100 AS 'UniqueCTR',
+  CAST(e.NetGrowth AS DECIMAL(18,2)) / CAST(e.ActiveSubscribers AS Decimal(18,2)) * 100 AS 'PercentGrowth'
+FROM Account_Health_Monthly e
+JOIN Account_Health_Daily d
+ON e.Month = d.Month
+WHERE d.SentCount > 0
+GROUP BY e.Month, e.NetGrowth, e.ActiveSubscribers
