@@ -1,0 +1,3 @@
+Select SubscriberID, 
+DateDiff(day,LastOpenDate,LastSentDate) AS 'DateDiff'
+FROM Subscriber_Last_Open
