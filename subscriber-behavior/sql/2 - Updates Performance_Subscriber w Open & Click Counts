@@ -1,0 +1,23 @@
+SELECT
+e.SubscriberID,
+g.AllClicks,
+r.AllOpens,
+a.UniqueOpens,
+y.UniqueClicks
+FROM _Subscribers e
+JOIN (
+    SELECT SubscriberID, COUNT(SubscriberID) AS 'AllClicks' FROM _Click GROUP BY SubscriberID
+          ) g
+ON e.SubscriberID = g.SubscriberID
+JOIN (
+    SELECT SubscriberID, COUNT(SubscriberID) AS 'AllOpens' FROM _Open GROUP BY SubscriberID
+          ) r
+ON e.SubscriberID = r.SubscriberID
+JOIN (
+    SELECT SubscriberID, COUNT(SubscriberID) AS 'UniqueOpens' FROM _Open WHERE IsUnique = 1 GROUP BY SubscriberID
+          ) a
+ON e.SubscriberID = a.SubscriberID
+JOIN (
+    SELECT SubscriberID, COUNT(SubscriberID) AS 'UniqueClicks' FROM _Click WHERE IsUnique = 1 GROUP BY SubscriberID
+          ) y
+ON e.SubscriberID = y.SubscriberID
