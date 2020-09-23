@@ -1,0 +1,4 @@
+SELECT e.ActiveSubscribers, d.Month
+FROM Account_Health_Daily e 
+INNER JOIN Account_Health_Monthly d 
+ON d.MonthStamp = e.DateStamp
