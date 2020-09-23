@@ -1,0 +1,118 @@
+<script runat="server">
+    Platform.Load("core", "1.1.1");
+	
+    var api = new Script.Util.WSProxy();
+	
+	try {
+	
+        var FolderName = "Reporting";
+        var FolderAttributes = Folder.Retrieve({ Property: "Name", SimpleOperator: "equals", Value: FolderName });
+        var FolderID = FolderAttributes[0].ID;
+		    var perf = api.retrieve("DataExtension", ["CustomerKey"], {
+			    Property: "Name",
+			    SimpleOperator: "equals",
+			    Value: "Performance_Subscriber"
+		});
+		
+		var perfKey = perf.Results[0].CustomerKey;
+
+var perfFields = [
+	{
+		"Name": "EmailAddress",
+		"FieldType": "EmailAddress"
+	},
+	{
+		"Name": "Sent",
+		"FieldType": "Number",
+		"DefaultValue": 0
+	},
+	{
+		"Name": "UniqueOpens",
+		"FieldType": "Number",
+		"DefaultValue": 0
+	},
+	{
+		"Name": "UniqueOpenRate",
+		"FieldType": "Decimal",
+		"DefaultValue": 0,
+		"MaxLength": 18,
+		"Scale": 2
+	},
+	{
+		"Name": "UniqueClicks",
+		"FieldType": "Number",
+		"DefaultValue": 0
+	},
+	{
+		"Name": "UniqueCTR",
+		"FieldType": "Decimal",
+		"MaxLength": 18,
+		"Scale": 2,
+		"DefaultValue": 0
+	},
+	{
+		"Name": "AllOpens",
+		"FieldType": "Number",
+		"DefaultValue": 0
+	},
+	{
+		"Name": "AllOpenRate",
+		"FieldType": "Decimal",
+		"MaxLength": 18,
+		"Scale": 2,
+		"DefaultValue": 0
+	},
+	{
+		"Name": "AllClicks",
+		"FieldType": "Number",
+		"DefaultValue": 0
+	},
+	{
+		"Name": "AllCTR",
+		"FieldType": "Decimal",
+		"MaxLength": 18,
+		"Scale": 2,
+		"DefaultValue": 0
+	},
+	{
+		"Name": "Bounces",
+		"FieldType": "Number",
+		"DefaultValue": 0
+	},
+	{
+		"Name": "Status",
+		"FieldType": "Text",
+		"MaxLength": 12
+	},
+	{
+		"Name": "DateJoined",
+		"FieldType": "Date"
+	},
+	{
+		"Name": "DateUnsubscribed",
+		"FieldType": "Date"
+	},
+	{
+		"Name": "SubscriberID",
+		"FieldType": "Number",
+		"IsPrimaryKey": true,
+		"IsRequired" : true
+	}
+];
+
+var perfConfig = {
+	"CustomerKey": perfKey,
+	"Name": "Performance_Subscriber",
+	"CategoryID": FolderID,
+	"Fields": perfFields
+};
+
+var createPerf = api.createItem("DataExtension", perfConfig); 
+
+Write(Stringify(createPerf));
+		
+	} catch(error) {
+		Write(Stringify(error));
+	}		
+
+</script>
