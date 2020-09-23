@@ -1,0 +1,181 @@
+<script runat="server">
+    Platform.Load("core", "1.1.1");
+	
+    var api = new Script.Util.WSProxy();
+	
+	try {
+	
+        var FolderName = "Reporting";
+        var FolderAttributes = Folder.Retrieve({ Property: "Name", SimpleOperator: "equals", Value: FolderName });
+        var FolderID = FolderAttributes[0].ID;
+		var AHD = api.retrieve("DataExtension", ["CustomerKey"], {
+			Property: "Name",
+			SimpleOperator: "equals",
+			Value: "Account_Health_Daily"
+		});
+		var AHDS = api.retrieve("DataExtension", ["CustomerKey"], {
+			Property: "Name",
+			SimpleOperator: "equals",
+			Value: "Account_Health_Daily_Sorted"
+		});
+		var AHM = api.retrieve("DataExtension", ["CustomerKey"], {
+			Property: "Name",
+			SimpleOperator: "equals",
+			Value: "Account_Health_Monthly"
+		});
+
+		var AHDcustomerKey = AHD.Results[0].CustomerKey;
+		var AHDScustomerKey = AHDS.Results[0].CustomerKey;
+		var AHMcustomerKey = AHM.Results[0].CustomerKey;
+
+var fields = [
+	{
+		"Name": "Date",
+		"FieldType": "Text",
+		"MaxLength": 50,
+		"IsPrimaryKey": true,
+		"IsRequired" : true
+	},
+	{
+		"Name": "NewSubscribers",
+		"FieldType": "Number",
+		"DefaultValue": 0
+	},
+	{
+		"Name": "Unsubscribes",
+		"FieldType": "Number",
+		"DefaultValue": 0
+	},
+	{
+		"Name": "ActiveSubscribers",
+		"FieldType": "Number",
+		"DefaultValue": 0
+	},
+	{
+		"Name": "Sent",
+		"FieldType": "Number",
+		"DefaultValue": 0
+	},
+	{
+		"Name": "Opens",
+		"FieldType": "Number",
+		"DefaultValue": 0
+	},
+	{
+		"Name": "Clicks",
+		"FieldType": "Number",
+		"DefaultValue": 0
+	},
+	{
+		"Name": "Bounces",
+		"FieldType": "Number",
+		"DefaultValue": 0
+	},
+	{
+		"Name": "DateStamp",
+		"FieldType": "Date"
+	},
+	{
+		"Name": "Month",
+		"FieldType": "Text",
+		"MaxLength": 50
+	}
+];
+
+var mfields = [
+	{
+		"Name": "Month",
+		"FieldType": "Text",
+		"MaxLength": 50,
+		"IsPrimaryKey": true,
+		"IsRequired" : true
+	},
+	{
+		"Name": "NewSubscribers",
+		"FieldType": "Number",
+		"DefaultValue": 0
+	},
+	{
+		"Name": "Unsubscribes",
+		"FieldType": "Number",
+		"DefaultValue": 0
+	},
+	{
+		"Name": "NetGrowth",
+		"FieldType": "Decimal",
+		"MaxLength": 18,
+		"Scale": 2
+	},
+	{
+		"Name": "ActiveSubscribers",
+		"FieldType": "Number",
+		"DefaultValue": 0
+	},
+	{
+		"Name": "PercentGrowth",
+		"FieldType": "Decimal",
+		"MaxLength": 18,
+		"Scale": 2
+	},
+	{
+		"Name": "Sent",
+		"FieldType": "Number",
+		"DefaultValue": 0
+	},
+	{
+		"Name": "OpenRate",
+		"FieldType": "Decimal",
+		"MaxLength": 18,
+		"Scale": 2
+	},
+	{
+		"Name": "CTR",
+		"FieldType": "Decimal",
+		"MaxLength": 18,
+		"Scale": 2
+	},
+	{
+		"Name": "Bounces",
+		"FieldType": "Number",
+		"DefaultValue": 0
+	},
+	{
+		"Name": "MonthStamp",
+		"FieldType": "Date"
+	}
+];
+
+var AHDconfig = {
+	"CustomerKey": AHDcustomerKey,
+	"Name": "Account_Health_Daily",
+	"CategoryID": FolderID,
+	"Fields": fields
+};
+
+var AHDSconfig = {
+	"CustomerKey": AHDScustomerKey,
+	"Name": "Account_Health_Daily_Sorted",
+	"CategoryID": FolderID,
+	"Fields": fields
+};
+
+var AHMconfig = {
+	"CustomerKey": AHMcustomerKey,
+	"Name": "Account_Health_Monthly",
+	"CategoryID": FolderID,
+	"Fields": mfields
+};
+
+var createDaily = api.createItem("DataExtension", AHDconfig); 
+var createSorted = api.createItem("DataExtension", AHDSconfig); 
+var createMonthly = api.createItem("DataExtension", AHMconfig); 
+
+Write(Stringify(createDaily));
+Write(Stringify(createSorted));
+Write(Stringify(createMonthly));
+		
+	} catch(error) {
+		Write(Stringify(error));
+	}		
+
+</script>
