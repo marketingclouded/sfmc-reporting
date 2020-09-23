@@ -1,0 +1,12 @@
+SELECT TOP 9223372036854775807
+  e.EmailName,
+  e.SchedTime AS 'SentTime',
+  e.JobID,
+  COUNT(d.JobID) AS 'Sent'
+FROM _Job e
+JOIN _Sent d
+ON d.JobId = e.JobId
+WHERE e.TriggererSendDefinitionObjectID IS NULL
+GROUP BY e.EmailName, e.SchedTime, e.JobId
+HAVING e.JobID != '' AND COUNT(d.JobId) > 10
+ORDER BY e.SchedTime DESC
