@@ -1,0 +1,13 @@
+SELECT
+  e.EmailAddress,
+  e.SubscriberID,
+  e.Status,
+  e.DateJoined,
+  e.DateUnsubscribed,
+  MAX(d.EventDate) AS 'LastSentDate',
+  COUNT(d.SubscriberID) AS Sent
+FROM _Subscribers e
+JOIN _Sent d
+ON e.SubscriberID = d.SubscriberID
+GROUP BY e.SubscriberID, e.EmailAddress, e.Status, e.DateJoined, e.DateUnsubscribed
+HAVING COUNT(d.SubscriberID) > 0
