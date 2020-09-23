@@ -1,0 +1,214 @@
+<h2 style="text-align:center;font-family: Roboto, sans-serif;">
+  Weekly Send Log
+</h2>
+<table style="width:100%;border:2px solid black;font-family: Roboto,sans-serif;">
+<tr><th style="background-color:#031445;color:#fff;padding:10px;border-bottom:1px solid black;text-align:center;">Week Starting</th>
+<th style="background-color:#031445;color:#fff;padding:10px;border-bottom:1px solid black;text-align:center;">Sent</th>
+<th style="background-color:#031445;color:#fff;padding:10px;border-bottom:1px solid black;text-align:center;">Opens</th>
+<th style="background-color:#031445;color:#fff;padding:10px;border-bottom:1px solid black;text-align:center;">Clicks</th>
+<th style="background-color:#031445;color:#fff;padding:10px;border-bottom:1px solid black;text-align:center;">Bounces</th>
+  </tr>
+%%[
+
+SET @TotalSent1 = 0
+SET @TotalOpens1 = 0
+SET @TotalClicks1 = 0
+SET @TotalBounces1 = 0
+
+For @Days = 2 to 8 Do
+ 
+Set @Date1 = FormatDate(DateAdd(Now(), multiply(@Days, -1), "D"), "MMM dd yyyy")
+Set @DateRows = LookupRows("List_Health_Daily_Sorted","Date",@Date1)
+
+IF rowcount(@DateRows) > 0 THEN
+
+Set @DateRow = Row(@DateRows,1)
+Set @SentCount = Field(@DateRow, "Sentt")
+Set @OpenCount = Field(@DateRow, "Opens")
+Set @ClickCount = Field(@DateRow, "Clicks")
+Set @BounceCount = Field(@DateRow, "Bounces")
+Set @TotalSent1 = Add(@TotalSent1,@SentCount)
+Set @TotalOpens1 = Add(@TotalOpens1,@OpenCount)
+Set @TotalClicks1 = Add(@TotalClicks1,@ClickCount)
+Set @TotalBounces1 = Add(@TotalBounces1,@BounceCount)
+
+ENDIF
+
+NEXT
+
+]%%
+
+<tr>
+<td style="padding:10px;text-align:center;">%%=v(@Date1)=%%</td>
+<td style="padding:10px;text-align:center;">%%=FormatNumber(v(@TotalSent1), "N0")=%%</td>
+<td style="padding:10px;text-align:center;">%%=FormatNumber(v(@TotalOpens1), "N0")=%%</td>
+<td style="padding:10px;text-align:center;">%%=FormatNumber(v(@TotalClicks1), "N0")=%%</td>
+<td style="padding:10px;text-align:center;">%%=FormatNumber(v(@TotalBounces1), "N0")=%%</td>
+</tr>
+  
+%%[
+
+SET @TotalSent2 = 0
+SET @TotalOpens2 = 0
+SET @TotalClicks2 = 0
+SET @TotalBounces2 = 0
+
+For @Days = 9 to 15 Do
+ 
+Set @Date2 = FormatDate(DateAdd(Now(), multiply(@Days, -1), "D"), "MMM dd yyyy")
+Set @DateRows = LookupRows("List_Health_Daily_Sorted","Date",@Date2)
+
+IF rowcount(@DateRows) > 0 THEN
+
+Set @DateRow = Row(@DateRows,1)
+Set @SentCount = Field(@DateRow, "Sent")
+Set @OpenCount = Field(@DateRow, "Opens")
+Set @ClickCount = Field(@DateRow, "Clicks")
+Set @BounceCount = Field(@DateRow, "Bounces")
+Set @TotalSent2 = Add(@TotalSent2,@SentCount)
+Set @TotalOpens2 = Add(@TotalOpens2,@OpenCount)
+Set @TotalClicks2 = Add(@TotalClicks2,@ClickCount)
+Set @TotalBounces2 = Add(@TotalBounces2,@BounceCount)
+
+ENDIF
+
+NEXT
+
+]%%
+
+<tr style="background-color: #fc6e62;">
+<td style="padding:10px;text-align:center;font-weight:bold;">%%=v(@Date2)=%%</td>
+<td style="padding:10px;text-align:center;font-weight:bold;">%%=FormatNumber(v(@TotalSent2), "N0")=%%</td>
+<td style="padding:10px;text-align:center;font-weight:bold;">%%=FormatNumber(v(@TotalOpens2), "N0")=%%</td>
+<td style="padding:10px;text-align:center;font-weight:bold;">%%=FormatNumber(v(@TotalClicks2), "N0")=%%</td>
+<td style="padding:10px;text-align:center;font-weight:bold;">%%=FormatNumber(v(@TotalBounces2), "N0")=%%</td>
+</tr>
+
+%%[
+
+SET @TotalSent3 = 0
+SET @TotalOpens3 = 0
+SET @TotalClicks3 = 0
+SET @TotalBounces3 = 0
+
+For @Days = 16 to 22 Do
+ 
+Set @Date3 = FormatDate(DateAdd(Now(), multiply(@Days, -1), "D"), "MMM dd yyyy")
+Set @DateRows = LookupRows("List_Health_Daily_Sorted","Date",@Date3)
+
+IF rowcount(@DateRows) > 0 THEN
+
+Set @DateRow = Row(@DateRows,1)
+Set @SentCount = Field(@DateRow, "Sent")
+Set @OpenCount = Field(@DateRow, "Opens")
+Set @ClickCount = Field(@DateRow, "Clicks")
+Set @BounceCount = Field(@DateRow, "Bounces")
+Set @TotalSent3 = Add(@TotalSent3,@SentCount)
+Set @TotalOpens3 = Add(@TotalOpens3,@OpenCount)
+Set @TotalClicks3 = Add(@TotalClicks3,@ClickCount)
+Set @TotalBounces3 = Add(@TotalBounces3,@BounceCount)
+
+ENDIF
+
+NEXT
+
+]%%
+
+<tr>
+<td style="padding:10px;text-align:center;">%%=v(@Date3)=%%</td>
+<td style="padding:10px;text-align:center;">%%=FormatNumber(v(@TotalSent3), "N0")=%%</td>
+<td style="padding:10px;text-align:center;">%%=FormatNumber(v(@TotalOpens3), "N0")=%%</td>
+<td style="padding:10px;text-align:center;">%%=FormatNumber(v(@TotalClicks3), "N0")=%%</td>
+<td style="padding:10px;text-align:center;">%%=FormatNumber(v(@TotalBounces3), "N0")=%%</td>
+</tr>  
+
+%%[
+
+SET @TotalSent4 = 0
+SET @TotalOpens4 = 0
+SET @TotalClicks4 = 0
+SET @TotalBounces4 = 0
+
+For @Days = 23 to 29 Do
+ 
+Set @Date4 = FormatDate(DateAdd(Now(), multiply(@Days, -1), "D"), "MMM dd yyyy")
+Set @DateRows = LookupRows("List_Health_Daily_Sorted","Date",@Date4)
+
+IF rowcount(@DateRows) > 0 THEN
+
+Set @DateRow = Row(@DateRows,1)
+Set @SentCount = Field(@DateRow, "Sent")
+Set @OpenCount = Field(@DateRow, "Opens")
+Set @ClickCount = Field(@DateRow, "Clicks")
+Set @BounceCount = Field(@DateRow, "Bounces")
+Set @TotalSent4 = Add(@TotalSent4,@SentCount)
+Set @TotalOpens4 = Add(@TotalOpens4,@OpenCount)
+Set @TotalClicks4 = Add(@TotalClicks4,@ClickCount)
+Set @TotalBounces4 = Add(@TotalBounces4,@BounceCount)
+
+ENDIF
+
+NEXT
+
+]%%
+
+<tr style="background-color: #fc6e62;">
+<td style="padding:10px;text-align:center;font-weight:bold;">%%=v(@Date4)=%%</td>
+<td style="padding:10px;text-align:center;font-weight:bold;">%%=FormatNumber(v(@TotalSent4), "N0")=%%</td>
+<td style="padding:10px;text-align:center;font-weight:bold;">%%=FormatNumber(v(@TotalOpens4), "N0")=%%</td>
+<td style="padding:10px;text-align:center;font-weight:bold;">%%=FormatNumber(v(@TotalClicks4), "N0")=%%</td>
+<td style="padding:10px;text-align:center;font-weight:bold;">%%=FormatNumber(v(@TotalBounces4), "N0")=%%</td>
+</tr>
+</table>
+
+<h2 style="text-align:center;font-family: Roboto, sans-serif;">
+  Weekly Performance Log
+</h2>
+<table style="width:100%;border:2px solid black;font-family: Roboto, sans-serif;">
+<tr><th style="background-color:#031445;color:#fff;padding:10px;border-bottom:1px solid black;text-align:center;">Week Starting</th>
+<th style="background-color:#031445;color:#fff;padding:10px;border-bottom:1px solid black;text-align:center;">Open Rate</th>
+<th style="background-color:#031445;color:#fff;padding:10px;border-bottom:1px solid black;text-align:center;">Click Rate</th>
+<th style="background-color:#031445;color:#fff;padding:10px;border-bottom:1px solid black;text-align:center;">Bounce Rate</th>
+  </tr>
+  %%[
+SET @ORWeek1 = divide(@TotalOpens1, @TotalSent1)
+SET @CTRWeek1 = divide(@TotalClicks1, @TotalSent1)
+SET @BRWeek1 = divide(@TotalBounces1, @TotalSent1)
+
+SET @ORWeek2 = divide(@TotalOpens2, @TotalSent2)
+SET @CTRWeek2 = divide(@TotalClicks2, @TotalSent2)
+SET @BRWeek2 = divide(@TotalBounces2, @TotalSent2)
+
+SET @ORWeek3 = divide(@TotalOpens3, @TotalSent3)
+SET @CTRWeek3 = divide(@TotalClicks3, @TotalSent3)
+SET @BRWeek3 = divide(@TotalBounces3, @TotalSent3)
+
+SET @ORWeek4 = divide(@TotalOpens4, @TotalSent4)
+SET @CTRWeek4 = divide(@TotalClicks4, @TotalSent4)
+SET @BRWeek4 = divide(@TotalBounces4, @TotalSent4)
+  ]%%
+<tr>
+  <td style="padding:10px;text-align:center;">%%=v(@Date1)=%%</td>
+  <td style="padding:10px;text-align:center;">%%=FormatNumber(v(@ORWeek1), "#.00%")=%%</td>
+  <td style="padding:10px;text-align:center;">%%=FormatNumber(v(@CTRWeek1), "#.00%")=%%</td>
+  <td style="padding:10px;text-align:center;">%%=FormatNumber(v(@BRWeek1), "#.00%")=%%</td>
+</tr>  
+<tr style="background-color: #fc6e62;">
+  <td style="padding:10px;text-align:center;font-weight:bold;">%%=v(@Date2)=%%</td>
+  <td style="padding:10px;text-align:center;font-weight:bold;">%%=FormatNumber(v(@ORWeek2), "#.00%")=%%</td>
+  <td style="padding:10px;text-align:center;font-weight:bold;">%%=FormatNumber(v(@CTRWeek2), "#.00%")=%%</td>
+  <td style="padding:10px;text-align:center;font-weight:bold;">%%=FormatNumber(v(@BRWeek2), "#.00%")=%%</td>
+</tr>
+  <tr>
+  <td style="padding:10px;text-align:center;">%%=v(@Date3)=%%</td>
+  <td style="padding:10px;text-align:center;">%%=FormatNumber(v(@ORWeek3), "#.00%")=%%</td>
+  <td style="padding:10px;text-align:center;">%%=FormatNumber(v(@CTRWeek3), "#.00%")=%%</td>
+  <td style="padding:10px;text-align:center;">%%=FormatNumber(v(@BRWeek3), "#.00%")=%%</td>
+</tr>
+  <tr style="background-color: #fc6e62;">
+  <td style="padding:10px;text-align:center;font-weight:bold;">%%=v(@Date4)=%%</td>
+  <td style="padding:10px;text-align:center;font-weight:bold;">%%=FormatNumber(v(@ORWeek4), "#.00%")=%%</td>
+  <td style="padding:10px;text-align:center;font-weight:bold;">%%=FormatNumber(v(@CTRWeek4), "#.00%")=%%</td>
+  <td style="padding:10px;text-align:center;font-weight:bold;">%%=FormatNumber(v(@BRWeek4), "#.00%")=%%</td>
+</tr>
+</table>
