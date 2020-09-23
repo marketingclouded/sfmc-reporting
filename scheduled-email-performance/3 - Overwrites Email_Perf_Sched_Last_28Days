@@ -1,0 +1,3 @@
+SELECT *
+FROM Email_Performance_Sched
+WHERE SentTime > DATEADD(d,DATEDIFF(day,30,GetDate()),0) AND SentTime < DATEADD(d,DATEDIFF(day,2,GetDate()),0)
