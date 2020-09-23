@@ -1,8 +1,8 @@
 SELECT
 SubscriberID,
-CAST(UniqueOpens AS DECIMAL(18,2)) / CAST(EmailsSent AS DECIMAL(18,2)) * 100 AS 'UniqueOpenRate',
-CAST(UniqueClicks AS DECIMAL(18,2)) / CAST(EmailsSent AS DECIMAL(18,2)) * 100 AS 'UniqueCTR',
-CAST(AllOpens AS DECIMAL(18,2)) / CAST(EmailsSent AS DECIMAL(18,2)) * 100 AS 'AllOpenRate',
-CAST(AllClicks AS DECIMAL(18,2)) / CAST(EmailsSent AS DECIMAL(18,2)) * 100 AS 'AllCTR'
+CAST(UniqueOpens AS DECIMAL(18,2)) / CAST(Sent AS DECIMAL(18,2)) * 100 AS 'UniqueOpenRate',
+CAST(UniqueClicks AS DECIMAL(18,2)) / CAST(Sent AS DECIMAL(18,2)) * 100 AS 'UniqueCTR',
+CAST(AllOpens AS DECIMAL(18,2)) / CAST(Sent AS DECIMAL(18,2)) * 100 AS 'AllOpenRate',
+CAST(AllClicks AS DECIMAL(18,2)) / CAST(Sent AS DECIMAL(18,2)) * 100 AS 'AllCTR'
 FROM Performance_Subscriber
-WHERE EmailsSent > 0
+WHERE Sent > 0
