@@ -1,0 +1,13 @@
+SELECT Top 1
+  FORMAT(DATEADD(d,-1,e.DateStamp),'MMM dd yyyy') AS 'Date',
+  DATEADD(d,-1,e.DateStamp) AS 'DateStamp',
+  FORMAT(DATEADD(d,-1,e.DateStamp),'MMMM, yyyy') AS 'Month',
+  (SELECT COUNT(SubscriberID) FROM _Subscribers WHERE DateJoined >= DATEADD(d,DATEDIFF(day, 1, e.DateStamp),0) AND DateJoined < DATEADD(d,DATEDIFF(day, 0, e.DateStamp),0)) AS 'NewSubscribers',
+  (SELECT COUNT(SubscriberID) FROM _Subscribers WHERE DateUnsubscribed >= DATEADD(d,DATEDIFF(day, 1, e.DateStamp),0) AND DateUnsubscribed < DATEADD(d,DATEDIFF(day, 0, e.DateStamp),0)) AS 'Unsubscribes',
+  (SELECT COUNT(SubscriberID) FROM _Subscribers WHERE Status = 'active' AND DateJoined < DATEADD(d,DATEDIFF(day, 0, e.DateStamp),0)) AS ActiveSubscribers,
+  (SELECT COUNT(SubscriberID) FROM _Sent WHERE EventDate >= DATEADD(d,DATEDIFF(day, 1, e.DateStamp),0) AND EventDate < DATEADD(d,DATEDIFF(day, 0, e.DateStamp),0)) AS 'Sent',
+  (SELECT COUNT(SubscriberID) FROM _Open WHERE EventDate >= DATEADD(d,DATEDIFF(day, 1, e.DateStamp),0) AND EventDate < DATEADD(d,DATEDIFF(day, 0, e.DateStamp),0) AND IsUnique = 1) AS 'Opens',
+  (SELECT COUNT(SubscriberID) FROM _Click WHERE EventDate >= DATEADD(d,DATEDIFF(day, 1, e.DateStamp),0) AND EventDate < DATEADD(d,DATEDIFF(day, 0, e.DateStamp),0) AND IsUnique = 1) AS 'Clicks',
+  (SELECT COUNT(SubscriberID) FROM _Bounce WHERE EventDate >= DATEADD(d,DATEDIFF(day, 1, e.DateStamp),0) AND EventDate < DATEADD(d,DATEDIFF(day, 0, e.DateStamp),0)) AS 'Bounces'
+FROM Account_Health_Daily e
+ORDER BY DateStamp ASC
