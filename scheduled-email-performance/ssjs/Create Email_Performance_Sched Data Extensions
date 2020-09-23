@@ -1,0 +1,116 @@
+<script runat="server">
+    Platform.Load("core", "1.1.1");
+	
+    var api = new Script.Util.WSProxy();
+	
+	try {
+	
+        var FolderName = "Reporting";
+        var FolderAttributes = Folder.Retrieve({ Property: "Name", SimpleOperator: "equals", Value: FolderName });
+        var FolderID = FolderAttributes[0].ID;
+		var EP = api.retrieve("DataExtension", ["CustomerKey"], {
+			Property: "Name",
+			SimpleOperator: "equals",
+			Value: "Email_Performance_Sched"
+		});
+		var EP28 = api.retrieve("DataExtension", ["CustomerKey"], {
+			Property: "Name",
+			SimpleOperator: "equals",
+			Value: "Email_Perf_Sched_Last_28Days"
+		});
+		
+		var EPcustomerKey = EP.Results[0].CustomerKey;
+		var EP28customerKey = EP28.Results[0].CustomerKey;
+
+var fields = [
+	{
+		"Name": "EmailName",
+		"FieldType": "Text",
+		"MaxLength": 100
+	},
+	{
+		"Name": "Sent",
+		"FieldType": "Number",
+		"DefaultValue": 0
+	},
+	{
+		"Name": "Unsubscribes",
+		"FieldType": "Number",
+		"DefaultValue": 0
+	},
+	{
+		"Name": "UnsubRate",
+		"FieldType": "Decimal",
+		"MaxLength": 18,
+		"Scale": 2
+	},
+	{
+		"Name": "SentTime",
+		"FieldType": "Date"
+	},
+	{
+		"Name": "JobID",
+		"FieldType": "Number",
+		"IsPrimaryKey": true,
+		"IsRequired": true
+	},
+	{
+		"Name": "Opens",
+		"FieldType": "Number",
+		"DefaultValue": 0
+	},
+	{
+		"Name": "OpenRate",
+		"FieldType": "Decimal",
+		"MaxLength": 18,
+		"Scale": 2
+	},
+	{
+		"Name": "Clicks",
+		"FieldType": "Number",
+		"DefaultValue": 0
+	},
+	{
+		"Name": "CTR",
+		"FieldType": "Decimal",
+		"MaxLength": 18,
+		"Scale": 2
+	},
+	{
+		"Name": "Bounces",
+		"FieldType": "Number",
+		"DefaultValue": 0
+	},
+	{
+		"Name": "BounceRate",
+		"FieldType": "Decimal",
+		"MaxLength": 18,
+		"Scale": 2
+	}
+];
+
+var EPconfig = {
+	"CustomerKey": SLOcustomerKey,
+	"Name": "Email_Performance_Sched",
+	"CategoryID": FolderID,
+	"Fields": fields
+};
+
+var EP28config = {
+	"CustomerKey": IScustomerKey,
+	"Name": "Email_Performance_Sched_Last_28Days",
+	"CategoryID": FolderID,
+	"Fields": fields
+};
+
+var createEP = api.createItem("DataExtension", EPconfig); 
+var createEP28 = api.createItem("DataExtension", EP28config); 
+
+Write(Stringify(createEP));
+Write(Stringify(createEP28));
+		
+	} catch(error) {
+		Write(Stringify(error));
+	}		
+
+</script>
