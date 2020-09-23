@@ -1,0 +1,44 @@
+<h2 style="text-align:center;font-family: Roboto, sans-serif;">
+  Performance of Scheduled Emails<br>Sent in Prior 28 Days 
+</h2>
+
+%%[
+
+SET @EmailRows = LookupRows("Email_Performance_Sched_Last_28Days", "Return", 1)
+SET @EmailCount = RowCount(@EmailRows)
+
+IF RowCount(@EmailRows) > 0 THEN
+
+FOR @Rows = 1 TO @EmailCount DO
+
+SET @EmailRow = Row(@EmailRows,@Rows)
+SET @EmailName = Field(@EmailRow,"EmailName")
+SET @Sent = Field(@EmailRow,"Sent")
+SET @SentTime = Field(@EmailRow,"SentTime")
+SET @UnsubRate = Field(@EmailRow,"UnsubRate")
+SET @BounceRate = Field(@EmailRow,"BounceRate")
+SET @OpenRate = Field(@EmailRow,"OpenRate")
+SET @CTR = Field(@EmailRow,"CTR")
+
+]%%
+
+<h3 style="color:#666;text-align:center;line-height:.5;font-family: Roboto, sans-serif;font-size:22px">
+  %%=v(@EmailName)=%%
+</h3>
+<p style="font-family: Roboto, sans-serif;text-align:center;">
+Sent At <b>%%=v(@SentTime)=%%</b>   |   
+Sent To <b>%%=FormatNumber(v(@Sent), "N0")=%%</b> Subscribers  
+</p>
+<table style="width:100%;border:2px solid black;font-family: 'Roboto Slab', Georgia, 'Times New Roman', Times, serif;"><tr><th style="background-color:#031445;color:#fff;padding:10px;border-bottom:1px solid black;text-align:center;">Unsubscribe Rate</th><th style="background-color:#031445;color:#fff;padding:10px;border-bottom:1px solid black;text-align:center;">Bounce Rate</th><th style="background-color:#031445;color:#fff;padding:10px;border-bottom:1px solid black;text-align:center;">Open Rate</th><th style="background-color:#031445;color:#fff;padding:10px;border-bottom:1px solid black;text-align:center;">Click Rate</th></tr>
+  <tr><td style="padding:10px;text-align:center;">%%=v(@UnsubRate)=%%%</td><td style="padding:10px;text-align:center;">%%=v(@BounceRate)=%%%</td><td style="padding:10px;text-align:center;">%%=v(@OpenRate)=%%%</td><td style="padding:10px;text-align:center;">%%=v(@CTR)=%%%</td></tr>
+</table>
+<br>
+<br>
+
+%%[ 
+
+NEXT
+
+ENDIF
+
+]%%
