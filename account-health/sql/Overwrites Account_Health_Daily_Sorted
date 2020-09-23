@@ -1,0 +1,4 @@
+SELECT TOP 9223372036854775807 
+NewSubscribers, Date, Unsubscribes, Sent, Opens, Clicks, Bounces, DateStamp, Month, ActiveSubscribers 
+FROM Account_Health_Daily
+ORDER BY DateStamp DESC
