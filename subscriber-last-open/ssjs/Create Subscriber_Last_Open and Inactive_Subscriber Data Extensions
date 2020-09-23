@@ -1,0 +1,103 @@
+<script runat="server">
+    Platform.Load("core", "1.1.1");
+	
+    var api = new Script.Util.WSProxy();
+	
+	try {
+	
+        var FolderName = "Reporting";
+        var FolderAttributes = Folder.Retrieve({ Property: "Name", SimpleOperator: "equals", Value: FolderName });
+        var FolderID = FolderAttributes[0].ID;
+		var SLO = api.retrieve("DataExtension", ["CustomerKey"], {
+			Property: "Name",
+			SimpleOperator: "equals",
+			Value: "Subscriber_Last_Open"
+		});
+		var IS = api.retrieve("DataExtension", ["CustomerKey"], {
+			Property: "Name",
+			SimpleOperator: "equals",
+			Value: "Inactive_Subscribers"
+		});
+		
+		var SLOcustomerKey = SLO.Results[0].CustomerKey;
+		var LHDScustomerKey = IS.Results[0].CustomerKey;
+
+var fields = [
+	{
+		"Name": "EmailAddress",
+		"FieldType": "EmailAddress"
+	},
+	{
+		"Name": "Status",
+		"FieldType": "Text",
+		"MaxLength": 12
+	},
+	{
+		"Name": "Sent",
+		"FieldType": "Number",
+		"DefaultValue": 0
+	},
+	{
+		"Name": "LastOpenDate",
+		"FieldType": "Date"
+	},
+	{
+		"Name": "EmailName",
+		"FieldType": "Text",
+		"MaxLength": 100
+	},
+	{
+		"Name": "LastSentDate",
+		"FieldType": "Date"
+	},
+	{
+		"Name": "DateDiff",
+		"FieldType": "Number",
+		"DefaultValue": 0
+	},
+	{
+		"Name": "JobID",
+		"FieldType": "Number",
+		"DefaultValue": 0
+	},
+	{
+		"Name": "DateJoined",
+		"FieldType": "Date"
+	},
+	{
+		"Name": "DateUnsubscribed",
+		"FieldType": "Date"
+	},
+	{
+		"Name": "SubscriberID",
+		"FieldType": "Number",
+		"IsPrimaryKey": true,
+		"IsRequired": true
+	}
+];
+
+var SLOconfig = {
+	"CustomerKey": SLOcustomerKey,
+	"Name": "Subscriber_Last_Open",
+	"CategoryID": FolderID,
+	"Fields": fields
+};
+
+var ISconfig = {
+	"CustomerKey": IScustomerKey,
+	"Name": "Inactive_Subscribers",
+	"CategoryID": FolderID,
+	"Fields": fields
+};
+
+var createSLO = api.createItem("DataExtension", SLOconfig); 
+var createIS = api.createItem("DataExtension", ISconfig); 
+
+Write(Stringify(createSLO));
+Write(Stringify(createIS));
+		
+	} catch(error) {
+		Write(Stringify(error));
+	}		
+
+</script>
