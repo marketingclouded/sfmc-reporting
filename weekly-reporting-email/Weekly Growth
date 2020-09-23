@@ -1,0 +1,147 @@
+<h2 style="text-align:center;font-family: Roboto, sans-serif;">
+  Weekly Growth
+</h2>
+
+<table style="width:100%;border:2px solid black;font-family: Roboto, sans-serif;">
+<tr><th style="background-color:#031445;color:#fff;padding:10px;border-bottom:1px solid black;text-align:center;">Week Starting On:</th>
+<th style="background-color:#031445;color:#fff;padding:10px;border-bottom:1px solid black;text-align:center;">New Subscribers</th>
+<th style="background-color:#031445;color:#fff;padding:10px;border-bottom:1px solid black;text-align:center;">Unsubscribes</th>
+<th style="background-color:#031445;color:#fff;padding:10px;border-bottom:1px solid black;text-align:center;">Net Growth</th>
+
+%%[
+
+SET @TotalNewSubscribers = 0
+SET @TotalUnsubscribes = 0
+SET @TotalNetGrowth = 0
+
+For @Days = 2 to 8 Do
+ 
+Set @Date = FormatDate(DateAdd(Now(), multiply(@Days, -1), "D"), "MMM dd yyyy")
+Set @DateRows = LookupRows("List_Health_Daily_Sorted","Date",@Date)
+
+IF rowcount(@DateRows) > 0 THEN
+
+Set @DateRow = Row(@DateRows,1)
+Set @NewSubscribers = Field(@DateRow, "NewSubscribers")
+Set @Unsubscribes = Field(@DateRow, "Unsubscribes")
+Set @NetGrowth = Subtract(@NewSubscribers,@Unsubscribes)
+Set @TotalNewSubscribers = Add(@TotalNewSubscribers,@NewSubscribers)
+Set @TotalUnsubscribes = Add(@TotalUnsubscribes,@Unsubscribes)
+Set @TotalNetGrowth = Add(@TotalNetGrowth,@NetGrowth)
+
+
+ENDIF
+
+NEXT
+
+]%%
+
+</tr><tr>
+<td style="padding:10px;text-align:center;">%%=v(@Date)=%%</td>
+<td style="padding:10px;text-align:center;">%%=FormatNumber(v(@TotalNewSubscribers), "N0")=%%</td>
+<td style="padding:10px;text-align:center;">%%=FormatNumber(v(@TotalUnsubscribes), "N0")=%%</td>
+<td style="padding:10px;text-align:center;">%%=FormatNumber(v(@TotalNetGrowth), "N0")=%%</td>
+</tr>
+   
+%%[
+
+SET @TotalNewSubscribers = 0
+SET @TotalUnsubscribes = 0
+SET @TotalNetGrowth = 0
+
+For @Days = 9 to 15 Do
+ 
+Set @Date = FormatDate(DateAdd(Now(), multiply(@Days, -1), "D"), "MMM dd yyyy")
+Set @DateRows = LookupRows("List_Health_Daily_Sorted","Date",@Date)
+
+IF rowcount(@DateRows) > 0 THEN
+
+Set @DateRow = Row(@DateRows,1)
+Set @NewSubscribers = Field(@DateRow, "NewSubscribers")
+Set @Unsubscribes = Field(@DateRow, "Unsubscribes")
+Set @NetGrowth = Subtract(@NewSubscribers,@Unsubscribes)
+Set @TotalNewSubscribers = Add(@TotalNewSubscribers,@NewSubscribers)
+Set @TotalUnsubscribes = Add(@TotalUnsubscribes,@Unsubscribes)
+Set @TotalNetGrowth = Add(@TotalNetGrowth,@NetGrowth)
+
+ENDIF
+
+NEXT
+
+]%%
+
+<tr style="background-color: #fc6e62;">
+<td style="padding:10px;text-align:center;font-weight:bold;">%%=v(@Date)=%%</td>
+<td style="padding:10px;text-align:center;font-weight:bold;">%%=FormatNumber(v(@TotalNewSubscribers), "N0")=%%</td>
+<td style="padding:10px;text-align:center;font-weight:bold;">%%=FormatNumber(v(@TotalUnsubscribes), "N0")=%%</td>
+<td style="padding:10px;text-align:center;font-weight:bold;">%%=FormatNumber(v(@TotalNetGrowth), "N0")=%%</td>
+</tr>
+
+%%[
+
+SET @TotalNewSubscribers = 0
+SET @TotalUnsubscribes = 0
+SET @TotalNetGrowth = 0
+
+For @Days = 16 to 22 Do
+ 
+Set @Date = FormatDate(DateAdd(Now(), multiply(@Days, -1), "D"), "MMM dd yyyy")
+Set @DateRows = LookupRows("List_Health_Daily_Sorted","Date",@Date)
+
+IF rowcount(@DateRows) > 0 THEN
+
+Set @DateRow = Row(@DateRows,1)
+Set @NewSubscribers = Field(@DateRow, "NewSubscribers")
+Set @Unsubscribes = Field(@DateRow, "Unsubscribes")
+Set @NetGrowth = Subtract(@NewSubscribers,@Unsubscribes)
+Set @TotalNewSubscribers = Add(@TotalNewSubscribers,@NewSubscribers)
+Set @TotalUnsubscribes = Add(@TotalUnsubscribes,@Unsubscribes)
+Set @TotalNetGrowth = Add(@TotalNetGrowth,@NetGrowth)
+
+ENDIF
+
+NEXT
+
+]%%
+
+<tr>
+<td style="padding:10px;text-align:center;">%%=v(@Date)=%%</td>
+<td style="padding:10px;text-align:center;">%%=FormatNumber(v(@TotalNewSubscribers), "N0")=%%</td>
+<td style="padding:10px;text-align:center;">%%=FormatNumber(v(@TotalUnsubscribes), "N0")=%%</td>
+<td style="padding:10px;text-align:center;">%%=FormatNumber(v(@TotalNetGrowth), "N0")=%%</td>
+</tr>
+
+%%[
+
+SET @TotalNewSubscribers = 0
+SET @TotalUnsubscribes = 0
+SET @TotalNetGrowth = 0
+
+For @Days = 23 to 29 Do
+ 
+Set @Date = FormatDate(DateAdd(Now(), multiply(@Days, -1), "D"), "MMM dd yyyy")
+Set @DateRows = LookupRows("List_Health_Daily_Sorted","Date",@Date)
+
+IF rowcount(@DateRows) > 0 THEN
+
+Set @DateRow = Row(@DateRows,1)
+Set @NewSubscribers = Field(@DateRow, "NewSubscribers")
+Set @Unsubscribes = Field(@DateRow, "Unsubscribes")
+Set @NetGrowth = Subtract(@NewSubscribers,@Unsubscribes)
+Set @TotalNewSubscribers = Add(@TotalNewSubscribers,@NewSubscribers)
+Set @TotalUnsubscribes = Add(@TotalUnsubscribes,@Unsubscribes)
+Set @TotalNetGrowth = Add(@TotalNetGrowth,@NetGrowth)
+
+ENDIF
+
+NEXT
+
+]%%
+
+<tr style="background-color: #fc6e62;">
+<td style="padding:10px;text-align:center;font-weight:bold;">%%=v(@Date)=%%</td>
+<td style="padding:10px;text-align:center;font-weight:bold;">%%=FormatNumber(v(@TotalNewSubscribers), "N0")=%%</td>
+<td style="padding:10px;text-align:center;font-weight:bold;">%%=FormatNumber(v(@TotalUnsubscribes), "N0")=%%</td>
+<td style="padding:10px;text-align:center;font-weight:bold;">%%=FormatNumber(v(@TotalNetGrowth), "N0")=%%</td>
+</tr>
+</table>
