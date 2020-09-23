@@ -22,7 +22,7 @@
 		var EPcustomerKey = EP.Results[0].CustomerKey;
 		var EP28customerKey = EP28.Results[0].CustomerKey;
 
-var fields = [
+var schedFields = [
 	{
 		"Name": "EmailName",
 		"FieldType": "Text",
@@ -89,18 +89,90 @@ var fields = [
 	}
 ];
 
+var L28Fields = [
+	{
+		"Name": "EmailName",
+		"FieldType": "Text",
+		"MaxLength": 100
+	},
+	{
+		"Name": "Sent",
+		"FieldType": "Number",
+		"DefaultValue": 0
+	},
+	{
+		"Name": "Unsubscribes",
+		"FieldType": "Number",
+		"DefaultValue": 0
+	},
+	{
+		"Name": "UnsubRate",
+		"FieldType": "Decimal",
+		"MaxLength": 18,
+		"Scale": 2
+	},
+	{
+		"Name": "SentTime",
+		"FieldType": "Date"
+	},
+	{
+		"Name": "JobID",
+		"FieldType": "Number",
+		"IsPrimaryKey": true,
+		"IsRequired": true
+	},
+	{
+		"Name": "Opens",
+		"FieldType": "Number",
+		"DefaultValue": 0
+	},
+	{
+		"Name": "OpenRate",
+		"FieldType": "Decimal",
+		"MaxLength": 18,
+		"Scale": 2
+	},
+	{
+		"Name": "Clicks",
+		"FieldType": "Number",
+		"DefaultValue": 0
+	},
+	{
+		"Name": "CTR",
+		"FieldType": "Decimal",
+		"MaxLength": 18,
+		"Scale": 2
+	},
+	{
+		"Name": "Bounces",
+		"FieldType": "Number",
+		"DefaultValue": 0
+	},
+	{
+		"Name": "BounceRate",
+		"FieldType": "Decimal",
+		"MaxLength": 18,
+		"Scale": 2
+	},
+	{
+		"Name": "Return",
+		"FieldType": "Number",
+		"DefaultValue": 1
+	}
+];
+
 var EPconfig = {
 	"CustomerKey": SLOcustomerKey,
 	"Name": "Email_Performance_Sched",
 	"CategoryID": FolderID,
-	"Fields": fields
+	"Fields": schedFields
 };
 
 var EP28config = {
 	"CustomerKey": IScustomerKey,
 	"Name": "Email_Performance_Sched_Last_28Days",
 	"CategoryID": FolderID,
-	"Fields": fields
+	"Fields": L28Fields
 };
 
 var createEP = api.createItem("DataExtension", EPconfig); 
