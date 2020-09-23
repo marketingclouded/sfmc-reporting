@@ -1,0 +1,7 @@
+%%[
+SET @Inactives = DataExtensionRowCount("Inactive_Subscribers")
+]%%
+
+<p style="font-family: Roboto, sans-serif; font-size:20px;">
+  There are currently <b>%%=FormatNumber(v(@Inactives), "N0")=%%</b> subscribers who not opened an email in more than 90 days.
+</p>
