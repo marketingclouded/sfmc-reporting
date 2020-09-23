@@ -1,0 +1,11 @@
+SELECT
+  g.SubscriberID,
+  MAX(a.EventDate) AS 'LastOpenDate',
+  MAX(a.JobID) AS 'JobID',
+  y.EmailName
+FROM Subscriber_Last_Open g
+JOIN _Open a
+ON g.SubscriberID = a.SubscriberID
+JOIN _Job y
+ON a.JobID = y.JobID
+GROUP BY g.SubscriberID, y.EmailName
