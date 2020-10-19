@@ -23,7 +23,7 @@ Set @DateRows = LookupRows("List_Health_Daily_Sorted","Date",@Date1)
 IF rowcount(@DateRows) > 0 THEN
 
 Set @DateRow = Row(@DateRows,1)
-Set @SentCount = Field(@DateRow, "Sentt")
+Set @SentCount = Field(@DateRow, "Sent")
 Set @OpenCount = Field(@DateRow, "Opens")
 Set @ClickCount = Field(@DateRow, "Clicks")
 Set @BounceCount = Field(@DateRow, "Bounces")
