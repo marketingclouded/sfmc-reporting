@@ -102,9 +102,8 @@ var mfields = [
 	},
 	{
 		"Name": "NetGrowth",
-		"FieldType": "Decimal",
-		"MaxLength": 18,
-		"Scale": 2
+		"FieldType": "Number",
+		"DefaultValue": 0
 	},
 	{
 		"Name": "ActiveSubscribers",
