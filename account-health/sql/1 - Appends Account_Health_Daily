@@ -4,7 +4,7 @@ SELECT
   FORMAT(DATEADD(d,-1,GETDATE()),'MMMM, yyyy') AS 'Month',
   (SELECT COUNT(SubscriberID) FROM _Subscribers WHERE DateJoined >= DATEADD(d,DATEDIFF(day, 1, GETDATE()),0) AND DateJoined < DATEADD(d,DATEDIFF(day, 0, GETDATE()),0)) AS 'NewSubscribers',
   (SELECT COUNT(SubscriberID) FROM _Subscribers WHERE DateUnsubscribed >= DATEADD(d,DATEDIFF(day, 1, GETDATE()),0) AND DateUnsubscribed < DATEADD(d,DATEDIFF(day, 0, GETDATE()),0)) AS 'Unsubscribes',
-  (SELECT COUNT(SubscriberID) FROM _Subscribers WHERE Status = 'active' AND DateJoined < DATEADD(d,DATEDIFF(day, 1, GETDATE()),0)) AS 'ActiveSubscribers',
+  (SELECT COUNT(SubscriberID) FROM _Subscribers WHERE Status = 'active') AS 'ActiveSubscribers',
   (SELECT COUNT(SubscriberID) FROM _Sent WHERE EventDate >= DATEADD(d,DATEDIFF(day, 1, GETDATE()),0) AND EventDate < DATEADD(d,DATEDIFF(day, 0, GETDATE()),0)) AS 'Sent',
   (SELECT COUNT(SubscriberID) FROM _Open WHERE EventDate >= DATEADD(d,DATEDIFF(day, 1, GETDATE()),0) AND EventDate < DATEADD(d,DATEDIFF(day, 0, GETDATE()),0) AND IsUnique = 1) AS 'Opens',
   (SELECT COUNT(SubscriberID) FROM _Click WHERE EventDate >= DATEADD(d,DATEDIFF(day, 1, GETDATE()),0) AND EventDate < DATEADD(d,DATEDIFF(day, 0, GETDATE()),0) AND IsUnique = 1) AS 'Clicks',
