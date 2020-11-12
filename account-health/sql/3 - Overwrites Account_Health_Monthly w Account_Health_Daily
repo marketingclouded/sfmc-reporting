@@ -1,9 +1,9 @@
 SELECT
   Month,
-  SUM(SentCount) AS 'Sent',
+  SUM(Sent) AS 'Sent',
   SUM(NewSubscribers) AS 'NewSubscribers',
   SUM(Unsubscribes) AS 'Unsubscribes',
-  SUM(BounceCount) AS 'Bounces',
+  SUM(Bounces) AS 'Bounces',
   SUM(NewSubscribers) - SUM(Unsubscribes) AS 'NetGrowth',
   MIN(DateStamp) AS 'MonthStamp'
 FROM Account_Health_Daily
