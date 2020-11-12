@@ -6,5 +6,5 @@ SELECT
 FROM Account_Health_Monthly e
 JOIN Account_Health_Daily d
 ON e.Month = d.Month
-WHERE d.SentCount > 0
+WHERE d.Sent > 0
 GROUP BY e.Month, e.NetGrowth, e.ActiveSubscribers
